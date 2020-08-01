@@ -1,0 +1,6 @@
+About the App :-
+
+This is app is a web app which makes it fairly easy to use. This app was designed to make it easier to donate money to the organization
+working during the COVID-19 pandemic, the organizations working for the welfare of others. This app is currently not fully developed as I am 
+working as a single developer. If this project gets supported the whole community will be able to benefit from it and the app will be complete with all its
+features...Thanks!!
