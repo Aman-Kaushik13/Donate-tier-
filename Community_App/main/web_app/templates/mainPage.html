@@ -1,0 +1,308 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Donate tier</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
+</head>
+
+<body style = "background-color:#FFD166;">
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+  <script>
+    alert("Hello! This web app is made by Aman Kaushik a 13 year old developer. This web app is just an idea and some features are not yet available this was specificly made to be able to explain the main idea of the web app. If this project will be supported soon other features will be available!")
+function guid(len) {
+        var buf = [],
+            chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
+            charlen = chars.length,
+            length = len || 32;
+            
+        for (var i = 0; i < length; i++) {
+            buf[i] = chars.charAt(Math.floor(Math.random() * charlen));
+        }
+        
+        return buf.join('');
+    }
+
+ var cookieVal = guid(15);
+
+function getCookie(name) {
+    // Split cookie string and get all individual name=value pairs in an array
+
+    var cookieArr = document.cookie.split(";");
+
+    // Loop through the array elements
+    for(var i = 0; i < cookieArr.length; i++) {
+        var cookiePair = cookieArr[i].split("=");
+
+        /* Removing whitespace at the beginning of the cookie name
+        and compare it with the given string */
+        if(name == cookiePair[0].trim()) {
+            // Decode the cookie value and return
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+
+    // Return null if not found
+    return null;
+}
+var user = JSON.parse(getCookie('user'))
+
+
+
+if (user != undefined){
+  user = {}
+  console.log("cookie was created but not visible to the user");
+	console.log('user Created!', user)
+	document.cookie ='user=' + JSON.stringify(user) + ";domain=;path=/"
+  user += cookieVal
+}
+
+    var firstPass = true;
+
+
+   
+   $("#firstLine").on("animationend", function () {
+      if (firstPass) {
+        $("#secondLine").addClass("animated fadeInUp");
+        $("#secondLine").css("visibility", "visible");
+        $("hr").css("visibility", "visible");
+        $("hr").addClass("animated fadeInLeft");
+        firstPass = false;
+      }
+    });
+
+    $("#secondLine").on("animationend", function () {
+      $("body").addClass("movedBackground");
+    });
+
+    $("input").on("focusin", function () {
+      $("#firstLine").addClass("fadeOutRight");
+      $("#secondLine").addClass("fadeOutLeft");
+    });
+
+    $("input").on("focusout", function () {
+      $("#firstLine").addClass("fadeInRight");
+      $("#firstLine").removeClass("fadeOutRight fadeInDown");
+      $("#secondLine").addClass("fadeInLeft");
+      $("#secondLine").removeClass("fadeOutLeft fadeInUp");
+    
+      var lineDrawing = anime({
+        targets: '#lineDrawing .lines path',
+        strokeDashoffset: [anime.setDashoffset, 0],
+        easing: 'easeInOutSine',
+        duration: 1500,
+        delay: function (el, i) { return i * 250 },
+        direction: 'reverse'
+      });
+    });
+
+    $("button").on("click", function () {
+      moveContent();
+    });
+
+    var name = "";
+
+    function moveContent() {
+      name = getName();
+      $("#content").animate({
+        marginTop: '-800px'
+      }, 1500, function () {
+        $("#content").html(" ");
+        $("#content").css("margin-top", "0");
+        $("#content").html("<h1 id='afterAnimationHeader' class='animated fadeIn'>" + name + ", this is your story.</h1>");
+      });
+    }
+
+    function getName() {
+      return $("#mainInput").val();
+    }
+
+    $("#mainInput").on('keyup', function (e) {
+      if (e.keyCode == 13) {
+        moveContent();
+      }
+
+    });
+
+    //Search Bar
+    var searchBar = document.getElementById("express-form-typeahead");
+    searchBar.addEventListener('click', function () {
+      var closeSearch = document.getElementById("closeSearch");
+      closeSearch.style.display = "block";
+    });
+    window.addEventListener('mouseup', e => {
+      //alert(e);
+      if (e.target != searchBar && e.target.parentNode != searchBar) {
+        var closeSearch = document.getElementById("closeSearch");
+        closeSearch.style.display = "";
+      }
+    });
+ 
+  </script>
+
+  <style>
+   
+    body,
+    html {
+      width: 100%;
+     
+
+      padding-bottom: 15rem;
+    }
+
+    body {
+
+      background-size: cover;
+      margin: 0;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: 0 0;
+      transition: 2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+   
+    h1 {
+      color: #ffffff;
+      letter-spacing: 1.4px;
+      text-align: center;
+    }
+
+    #firstLine {
+      margin-top: 120px;
+    }
+
+    #secondLine {
+      visibility: hidden;
+      margin-top: 10rem;
+    }
+
+    input {
+      letter-spacing: 0.5px;
+      width: 80%;
+      background-color: rgba(163, 163, 163, 0);
+      border: 1px solid rgba(255, 255, 255, 1);
+      color: #f7f7f7;
+      padding: 10px 10px;
+      border-radius: 10px;
+      transition: 0.5s;
+    }
+
+    input::placeholder {
+      color: rgba(242, 242, 242, 0.8);
+    }
+
+    button {
+      float: right;
+      letter-spacing: 0.5px;
+      width: 20%;
+      background-color: rgba(119, 119, 119, 0);
+      color: rgba(242, 242, 242, 0.8);
+      border: 1px solid rgba(255, 255, 255, 1);
+      padding: 10px 10px;
+      border-radius: 10px;
+      transition: 0.5s;
+    }
+
+    button:hover {
+      color: #FCD0A1;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0);
+
+    }
+
+    button:focus {
+      outline: none;
+    }
+
+    input:focus {
+      outline: none;
+      border: 1px solid rgba(255, 255, 255, 0);
+    }
+
+
+    .list-group-item {
+
+      background-color: rgba(0, 0, 0, 0.5);
+      border-top: 1px solid #ddd;
+      border-radius: 0;
+
+    }
+
+    .list-group-item:hover {
+      background-color: #FCD0A1;
+      padding-left: 20px;
+
+    }
+       .boldtext {
+      font-weight: bolder;
+    }
+  </style>
+  <div id="content">
+    <nav class="navbar navbar-expand"style="background-color: #3F84E5;">
+
+      <a style="color:white;">
+        <div style="font-size:x-large;padding-bottom:10px;padding-top: 10px;"><span class="boldtext">Donate</span><span
+          style="font-weight: 100; padding-left: 5px;">tier</span></h3>
+      </a>
+      
+      <ul class="navbar-nav mr-auto">
+      <li class="nav-item"><a class="nav-link"
+        style="color:white; padding-left: 10rem; padding-bottom:-10px;margin-top: -2.5rem;"
+            href="{% url 'info' %}">Info</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+        style="color:white; padding-left: 2rem; padding-bottom:-10px;margin-top: -2.5rem;"
+            href="{% url 'create-donation' %}">Create donation page</a>
+        </li>
+      </ul>
+      {% block content %} {% endblock content %}
+
+    </nav>
+
+  </div>
+
+  <div id="titles">
+    
+    <h1 id="firstLine" class="animated fadeInDown" style="color:black;">Donate</br> to the people <br><span
+        style=" color: rgb(49, 103, 135); font-size:2.5rem;"> working for the welfare</span><br>of others...</span><br>
+    </h1>
+    <h1 id="firstLine" class="animated fadeInDown"></h1>
+
+    <div class="container">
+
+      <ul class="list-group list-group-flush" style="background-color: rgba(0,0,0,0.5);">
+        <div style="	background-color: rgba(0,0,0,0.5);">
+        {% for item in donate_items %}
+          <li class="list-group-item background-color: rgba(0,0,0,0.5);" >{{ item.organisation }}<a href="{% url 'CreatedPage' item.id %}">
+            <div class="float-right">
+              <p>{{ item.location }}</p>
+             </div>
+          </li>
+           
+        {% endfor %}
+        </div>
+      </ul>
+
+
+    </div>
+
+</body>
+
+</html>
